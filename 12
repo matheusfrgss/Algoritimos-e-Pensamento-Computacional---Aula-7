@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+int calcularTotalEstoque(int estoque[], int quantidade) {
+    int i, total = 0;
+
+    for (i = 0; i < quantidade; i++) {
+        total += estoque[i];
+    }
+
+    return total;
+}
+
+int contarEstoqueBaixo(int estoque[], int quantidade) {
+    int i, contador = 0;
+
+    for (i = 0; i < quantidade; i++) {
+        if (estoque[i] < 5) {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+int buscarProduto(int estoque[], int codigo) {
+    int posicao;
+
+    if (codigo < 1 || codigo > 8) {
+        return -1;
+    }
+
+    posicao = codigo - 1;
+
+    return posicao;
+}
+
+int main() {
+    int estoque[8];
+    int i, total, baixo;
+    int codigo, posicao;
+
+    for (i = 0; i < 8; i++) {
+        printf("Digite a quantidade do produto %d: ", i + 1);
+        scanf("%d", &estoque[i]);
+    }
+
+    total = calcularTotalEstoque(estoque, 8);
+
+    baixo = contarEstoqueBaixo(estoque, 8);
+
+    printf("\nTotal de unidades no estoque: %d\n", total);
+    printf("Produtos com estoque baixo: %d\n", baixo);
+
+    printf("\nDigite o codigo do produto que deseja buscar: ");
+    scanf("%d", &codigo);
+
+    posicao = buscarProduto(estoque, codigo);
+
+    if (posicao != -1) {
+        printf("Produto encontrado na posicao %d.\n", posicao + 1);
+        printf("Quantidade disponivel: %d\n", estoque[posicao]);
+    } else {
+        printf("Produto nao encontrado.\n");
+    }
+
+    return 0;
+}
